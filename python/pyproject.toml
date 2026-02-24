@@ -10,4 +10,9 @@ dependencies = [
     "isort>=8.0.0",
     "pytest>=9.0.2",
     "pytest-cov>=7.0.0",
+    "taskipy>=1.14.1",
 ]
+
+[tool.taskipy.tasks]
+test = { cmd = "pytest", help = "runs unit tests" }
+requirements = { cmd = "uv pip compile pyproject.toml --no-deps --no-annotate -o requirements.txt", help = "syncs requirements.txt"}
