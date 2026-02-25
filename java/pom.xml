@@ -13,7 +13,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.2</junit.version>
-        <assertJ.version>3.22.0</assertJ.version>
+        <assertJ.version>3.27.7</assertJ.version>
     </properties>
 
     <build>
