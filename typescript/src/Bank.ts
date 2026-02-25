@@ -34,6 +34,6 @@ export class Bank {
 
     return currency2 === currency1
         ? amount
-        : amount * this._exchangeRates.get(currency1 + '->' + currency2)
+        : amount * (this._exchangeRates.get(currency1 + '->' + currency2) ?? 0)
   }
 }

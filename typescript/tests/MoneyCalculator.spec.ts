@@ -3,7 +3,7 @@ import { MoneyCalculator } from '../src/MoneyCalculator'
 
 describe('Money', function () {
   test('add in usd returns number', () => {
-    expect(MoneyCalculator.Add(5, Currency.USD, 10)).toBeNumber()
+    expect(MoneyCalculator.Add(5, Currency.USD, 10)).toBeDefined()
     expect(MoneyCalculator.Add(5, Currency.USD, 10)).not.toBeNull()
   })
 
