@@ -1,0 +1,9 @@
+﻿<Solution>
+	<Folder Name="/Solution Items/">
+		<File Path=".editorconfig" />
+		<File Path="../README.md" />
+		<File Path="Directory.Build.props" />
+	</Folder>
+	<Project Path="money-problem.Domain\money-problem.Domain.csproj" DisplayName="Domain" />
+	<Project Path="money-problem.Tests\money-problem.Tests.csproj" DisplayName="Tests" />
+</Solution>

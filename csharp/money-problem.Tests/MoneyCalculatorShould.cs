@@ -1,9 +1,9 @@
 using FluentAssertions;
-using money_problem.Domain;
+using MoneyProblem.Domain;
 using Xunit;
-using static money_problem.Domain.Currency;
+using static MoneyProblem.Domain.Currency;
 
-namespace money_problem.Tests
+namespace MoneyProblem.Tests
 {
     public class MoneyTest
     {
@@ -20,7 +20,7 @@ namespace money_problem.Tests
             MoneyCalculator
                 .Times(10, EUR, 2)
                 .Should()
-                .BeGreaterOrEqualTo(0d);
+                .BeGreaterThanOrEqualTo(0d);
         }
 
         [Fact]

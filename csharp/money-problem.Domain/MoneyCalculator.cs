@@ -1,4 +1,4 @@
-namespace money_problem.Domain;
+namespace MoneyProblem.Domain;
 
 public static class MoneyCalculator
 {

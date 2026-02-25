@@ -1,4 +1,4 @@
-namespace money_problem.Domain
+namespace MoneyProblem.Domain
 {
     public sealed class MissingExchangeRateException : Exception
     {

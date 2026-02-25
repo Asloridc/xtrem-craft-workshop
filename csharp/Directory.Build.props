@@ -1,0 +1,17 @@
+<Project>
+    <PropertyGroup Label="Project">
+        <Product>Xtrem Craft Workshop</Product>
+        <RootNamespace>money_problem</RootNamespace>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Compilation">
+        <Configurations>Debug;Release;CodeAnalysis</Configurations>
+        <DebugType Condition=" '$(Configuration)' == 'CodeAnalysis' ">Full</DebugType>
+        <DefineConstants Condition=" '$(Configuration)' == 'CodeAnalysis' ">DEBUG</DefineConstants>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <NoWarn>$(NoWarn);NU1603;NU5105;CS1591</NoWarn>
+    </PropertyGroup>
+
+</Project>

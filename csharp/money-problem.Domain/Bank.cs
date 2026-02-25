@@ -1,6 +1,4 @@
-using System.Collections.Immutable;
-
-namespace money_problem.Domain
+namespace MoneyProblem.Domain
 {
     public sealed class Bank
     {
