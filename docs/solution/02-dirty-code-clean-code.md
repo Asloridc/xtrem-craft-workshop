@@ -10,6 +10,11 @@
 - Convention de nommage propre à chaque développeur
 - Pas de tests
 - Pas d'encapsulation et pas d'abstration
+- Commentaires "inutiles" (qui explique ce que le code fait)
+- Obsolescence des dépendances
+- Code dupliqué
+- Paramètres inutilisés
+-  
 
 ## Qu'est-ce que du code propre ?
 
@@ -18,5 +23,7 @@
 - Avoir une harmonie dans le nommage des méthodes et variables (ex : camelCase, snake_case, PascalCase...)
 - Avoir une bonne documentation (docstring pour python)
 - Respecter les PEP8 (pour python)
-- Définitions dans un documents des régles de qualités de code à respecter au sein de l'équipe
+- Définitions dans un document des régles de qualités de code à respecter au sein de l'équipe
 - Utilisation de design patterns
+- Commentaires "Haut Niveau" (qui explique le pourquoi du comment)
+- Gestion des packages / module (faible couplage, forte cohésion)
