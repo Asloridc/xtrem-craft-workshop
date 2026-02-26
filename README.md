@@ -2,6 +2,7 @@
 - Montant Faustin
 - Devaux Luca
 - Des Déserts Thomas
+- MOUROUVIN Romain
 
 # Xtrem Craft workshop
 
