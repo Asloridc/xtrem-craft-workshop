@@ -112,3 +112,8 @@ requirements = { cmd = "uv pip compile pyproject.toml --no-deps --no-annotate -o
 [tool.mutmut]
 paths_to_mutate = ["src/"]
 pytest_add_cli_args_test_selection = ["tests/"]
+
+[dependency-groups]
+dev = [
+    "flake8>=7.3.0",
+]
