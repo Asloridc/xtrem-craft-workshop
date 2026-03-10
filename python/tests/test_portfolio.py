@@ -1,4 +1,3 @@
-import pytest
 from src.bank import Bank
 from src.currency import Currency
 from src.portfolio import Portfolio

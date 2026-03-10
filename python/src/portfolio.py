@@ -1,6 +1,7 @@
 from typing import List, Tuple
-from .currency import Currency
+
 from .bank import Bank
+from .currency import Currency
 
 
 class Portfolio:

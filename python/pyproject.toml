@@ -84,7 +84,7 @@ combine-as-imports = true
 
 [tool.ruff.lint.mccabe]
 # Flag errors (`C901`) whenever the complexity level exceeds 5.
-max-complexity = 1
+max-complexity = 5
 
 [tool.ruff.format]
 # Like Black, use double quotes for strings.
