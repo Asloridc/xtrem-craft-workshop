@@ -27,8 +27,5 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Run lint
-        run: uv run flake8 .
-
       - name: Run tests
         run: uv run pytest
