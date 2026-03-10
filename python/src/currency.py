@@ -5,3 +5,4 @@ class Currency(Enum):
     USD = "USD"
     EUR = "EUR"
     KRW = "KRW"
+    JPY = "JPY"
