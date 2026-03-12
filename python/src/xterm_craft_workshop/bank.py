@@ -1,8 +1,7 @@
 from typing import Dict
-
-from .currency import Currency
-from .missing_exchange_rate_error import MissingExchangeRateError
-from .money import Money
+from xterm_craft_workshop.currency import Currency
+from xterm_craft_workshop.missing_exchange_rate_error import MissingExchangeRateError
+from xterm_craft_workshop.money import Money
 
 
 class Bank:
