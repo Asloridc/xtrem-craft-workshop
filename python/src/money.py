@@ -1,10 +1,11 @@
 from .currency import Currency
 
+
 class Money:
     def __init__(self, amount: float, currency: Currency):
         self.amount = amount
         self.currency = currency
-        
+
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, Money):
             return False
@@ -20,10 +21,10 @@ class Money:
         if self.currency != other.currency:
             raise ValueError("pas la meme currency")
         return Money(self.amount + other.amount, self.currency)
-    
+
     def __mul__(self, multiplier: float) -> "Money":
         return Money(self.amount * multiplier, self.currency)
-    
+
     def __truediv__(self, other):
         if isinstance(other, (int, float)):
             if other == 0:

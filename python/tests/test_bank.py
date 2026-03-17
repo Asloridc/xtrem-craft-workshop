@@ -27,7 +27,7 @@ class TestBank:
         amount = 10
         expected = Money.of(10, Currency.EUR)
         # WHEN
-        result=  bank.convertMoney(Money.of(amount, from_currency), to_currency)
+        result = bank.convertMoney(Money.of(amount, from_currency), to_currency)
 
         # THEN
         assert result == expected
@@ -56,8 +56,12 @@ class TestBank:
 
         bank: Bank = Bank.create(Currency.EUR, Currency.USD, 1.2)
 
-        assert bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD) == Money.of(12, Currency.USD)
+        assert bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD) == Money.of(
+            12, Currency.USD
+        )
 
         bank.addExchangeRate(Currency.EUR, Currency.USD, 1.3)
 
-        assert bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD) == Money.of(13, Currency.USD)
+        assert bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD) == Money.of(
+            13, Currency.USD
+        )

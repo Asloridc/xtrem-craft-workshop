@@ -1,7 +1,6 @@
 from src.bank import Bank
 from src.currency import Currency
 from src.portfolio import Portfolio
-from src.money import Money
 
 
 class TestPortfolio:

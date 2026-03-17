@@ -23,7 +23,6 @@ class Bank:
     ) -> None:
         self._exchange_rate[f"{from_currency.value}->{to_currency.value}"] = rate
 
-
     def convertMoney(self, money: "Money", to_currency: Currency) -> "Money":
         if not self.needExchangeRate(money.currency, to_currency):
             return money
@@ -31,8 +30,7 @@ class Bank:
             rate = self._exchange_rate[f"{money.currency.value}->{to_currency.value}"]
             return Money.of(money.amount * rate, to_currency)
         raise MissingExchangeRateError(money.currency, to_currency)
-       
-    
+
     def needExchangeRate(self, from_currency: Currency, to_currency: Currency) -> bool:
         return from_currency.value != to_currency.value
 
