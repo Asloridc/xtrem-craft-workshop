@@ -1,6 +1,7 @@
 from src.bank import Bank
 from src.currency import Currency
 from src.portfolio import Portfolio
+from src.money import Money
 
 
 class TestPortfolio:
@@ -14,7 +15,7 @@ class TestPortfolio:
         portfolio.add(500, Currency.USD)
 
         # Then I should see 500
-        assert portfolio.evaluate(bank, Currency.USD) == 500
+        assert portfolio.evaluate(bank, Currency.USD).amount == 500
 
     def test_should_add_10_usd_to_existing_portfolio(self):
         # Given a portfolio containing some amount
@@ -27,7 +28,7 @@ class TestPortfolio:
         portfolio.add(10, Currency.USD)
 
         # Then I should see +10 USD (total = 510)
-        assert portfolio.evaluate(bank, Currency.USD) == 510
+        assert portfolio.evaluate(bank, Currency.USD).amount == 510
 
     def test_should_return_2000_jpy_when_portfolio_contains_10_usd_and_500_jpy(self):
         # Given un portfolio contenant 10 USD
@@ -42,7 +43,7 @@ class TestPortfolio:
         result = portfolio.evaluate(bank, Currency.JPY)
 
         # Then je devrais recevoir 2000 JPY
-        assert result == 2000
+        assert result.amount == 2000
 
     def test_should_return_2_08_usd_when_portfolio_contains_1_usd_and_1_eur(self):
         # Given un portfolio contenant 1 USD
@@ -57,7 +58,7 @@ class TestPortfolio:
         result = portfolio.evaluate(bank, Currency.USD)
 
         # Then je devrais recevoir 2.08 USD
-        assert result == 2.08
+        assert result.amount == 2.08
 
     def test_should_return_0_when_evaluating_empty_portfolio(self):
         # Given a portfolio empty
@@ -69,4 +70,4 @@ class TestPortfolio:
         result = portfolio.evaluate(bank, Currency.USD)
 
         # Then I should see 0
-        assert result == 0
+        assert result.amount == 0

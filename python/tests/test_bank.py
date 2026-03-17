@@ -1,6 +1,7 @@
 from src.bank import Bank
 from src.currency import Currency
 from src.missing_exchange_rate_error import MissingExchangeRateError
+from src.money import Money
 
 
 class TestBank:
@@ -11,9 +12,9 @@ class TestBank:
         rate = 1.2
         bank = Bank.create(from_currency, to_currency, rate)
         amount = 10
-        expected = 12
+        expected = Money.of(12, Currency.USD)
         # WHEN
-        result = bank.convert(amount, from_currency, to_currency)
+        result = bank.convertMoney(Money.of(amount, from_currency), to_currency)
         # THEN
         assert result == expected
 
@@ -24,9 +25,10 @@ class TestBank:
         rate = 1
         bank = Bank.create(from_currency, to_currency, rate)
         amount = 10
-        expected = 10
+        expected = Money.of(10, Currency.EUR)
         # WHEN
-        result = bank.convert(amount, from_currency, to_currency)
+        result=  bank.convertMoney(Money.of(amount, from_currency), to_currency)
+
         # THEN
         assert result == expected
 
@@ -40,7 +42,7 @@ class TestBank:
         amount = 10
         # WHEN
         try:
-            bank.convert(amount, from_currency, to_currency)
+            bank.convertMoney(Money.of(amount, from_currency), to_currency)
             # THEN
             assert False
         except MissingExchangeRateError:
@@ -54,8 +56,8 @@ class TestBank:
 
         bank: Bank = Bank.create(Currency.EUR, Currency.USD, 1.2)
 
-        assert bank.convert(10, Currency.EUR, Currency.USD) == 12
+        assert bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD) == Money.of(12, Currency.USD)
 
         bank.addExchangeRate(Currency.EUR, Currency.USD, 1.3)
 
-        assert bank.convert(10, Currency.EUR, Currency.USD) == 13
+        assert bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD) == Money.of(13, Currency.USD)
