@@ -1,4 +1,3 @@
-import pytest
 
 from xterm_craft_workshop.bank import Bank
 from xterm_craft_workshop.currency import Currency

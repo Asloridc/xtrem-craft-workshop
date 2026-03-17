@@ -1,6 +1,8 @@
+import pytest
+
 from xterm_craft_workshop.currency import Currency
 from xterm_craft_workshop.money import Money
-import pytest
+
 
 class TestMoney:
     def test_add_in_usd_returns_value(self):
