@@ -19,7 +19,10 @@ class TestBank:
         assert result == Money.of(12, Currency.USD)
     #Given missing EUR->USD rate
     def test_givenEuroAmount_WhenConvertToSameCurrency_ThenReturnsSameAmount(self):
-        """Quand un montant est converti dans la même devise, alors le même montant est retourné"""
+        """
+        Quand un montant est converti dans la même devise,
+        alors le même montant est retourné
+        """
 
         # GIVEN
         bank = BankBuilder().build()
@@ -208,7 +211,7 @@ class TestBank:
         # THEN
         result = bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD)
         assert result == Money.of(11, Currency.USD)
-        
+
     def test_givenNullPivot_WhenSetPivot_ThenThrows(self):
         """La pivot currency ne peut pas être null"""
         # GIVEN
@@ -220,9 +223,12 @@ class TestBank:
             assert False
         except ValueError:
             assert True
-    
+
     def test_givenNoPivot_WhenConvertBetweenTwoNonPivotCurrencies_ThenThrows(self):
-        """Quand aucune pivot currency n’est définie, certaines conversions sont impossibles"""
+        """
+        Quand aucune pivot currency n’est définie,
+        certaines conversions sont impossibles
+        """
         # GIVEN
         bank = (
             BankBuilder()
