@@ -60,3 +60,12 @@ class TestBank:
         # THEN
         second = bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD)
         assert second == Money.of(13, Currency.USD)
+        
+    def test_givenBank_WhenSetPivotCurrency_ThenPivotIsDefined(self):
+        bank = Bank()
+
+        bank.setPivotCurrency(Currency.USD)
+
+        assert bank.pivot == Currency.USD
+        
+    
