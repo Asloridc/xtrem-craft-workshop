@@ -1,9 +1,9 @@
 
-from src.xterm_craft_workshop.bank import Bank
-from src.xterm_craft_workshop.currency import Currency
-from src.xterm_craft_workshop.missing_exchange_rate_error import MissingExchangeRateError
-from src.xterm_craft_workshop.money import Money
-from BankBuilder import BankBuilder
+from xterm_craft_workshop.bank import Bank
+from xterm_craft_workshop.currency import Currency
+from xterm_craft_workshop.missing_exchange_rate_error import MissingExchangeRateError
+from xterm_craft_workshop.money import Money
+from .BankBuilder import BankBuilder
 
 
 class TestBank:
@@ -21,6 +21,8 @@ class TestBank:
         # GIVEN
         bank = BankBuilder().with_rate(Currency.EUR, Currency.EUR, 1).build()
         amount = 10
+        from_currency = Currency.EUR
+        to_currency = Currency.EUR
         expected = Money.of(10, Currency.EUR)
         # WHEN
         result = bank.convertMoney(Money.of(amount, from_currency), to_currency)
