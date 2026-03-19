@@ -1,5 +1,6 @@
 from xterm_craft_workshop.bank import Bank
 
+
 class BankBuilder:
     def __init__(self):
         self.rates = []
