@@ -100,6 +100,7 @@ class TestBank:
             assert False
         except MissingExchangeRateError:
             assert True
+            
     #Given pivot Money, which does not exist , then throws an exception
     def test_givenUnknownCurrency_WhenSetPivot_ThenThrows(self):
         # GIVEN
@@ -137,3 +138,12 @@ class TestBank:
 
         # THEN
         assert result == Money.of(5, Currency.EUR)
+
+    def test_givenNegativeRate_WhenAddExchangeRate_ThenThrows(self):
+        bank = Bank()
+
+        try:
+            bank.addExchangeRate(Currency.EUR, Currency.USD, -1)
+            assert False
+        except ValueError:
+            assert True

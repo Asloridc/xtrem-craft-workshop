@@ -55,6 +55,7 @@ class Bank:
             return self.get_rate_via_pivot(from_currency, to_currency)
 
         raise MissingExchangeRateError(from_currency, to_currency)
+    
     def get_rate_via_pivot(self, from_currency: Currency,
                            to_currency: Currency) -> float:
         if not self.hasExchangeRate(from_currency, self.pivot):
