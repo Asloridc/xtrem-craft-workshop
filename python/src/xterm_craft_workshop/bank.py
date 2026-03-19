@@ -42,6 +42,11 @@ class Bank:
         if self.hasExchangeRate(from_currency, to_currency):
             rate = self._exchange_rate[f"{from_currency.value}->{to_currency.value}"]
             return Money.of(money.amount * rate, to_currency)
+        
+        # 2.5 inverse rate 
+        if self.hasExchangeRate(to_currency, from_currency):
+            rate = self._exchange_rate[f"{to_currency.value}->{from_currency.value}"]
+            return Money.of(money.amount / rate, to_currency)
 
         # 3. pivot logic 
         if self.pivot is not None:
@@ -76,3 +81,5 @@ class Bank:
         if self.pivot is not None :
             raise ValueError("Pivot currency is already set")   
         self.pivot = pivot
+        
+    

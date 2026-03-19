@@ -122,3 +122,17 @@ class TestBank:
             assert False
         except ValueError:
             assert True
+            
+    def test_givenRateAtoB_WhenConvertBtoA_ThenUseInverseRate(self):
+        # GIVEN
+        bank = (
+            BankBuilder()
+            .with_rate(Currency.EUR, Currency.USD, 2)
+            .build()
+        )
+
+        # WHEN
+        result = bank.convertMoney(Money.of(10, Currency.USD), Currency.EUR)
+
+        # THEN
+        assert result == Money.of(5, Currency.EUR)
