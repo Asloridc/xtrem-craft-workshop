@@ -43,7 +43,7 @@ class TestBank:
             assert True
     #Given EUR->USD, pivot USD, missing USD->JPY
     def test_givenEuroAmount_WhenConvertWithDiffExchangeRate_ThenReturnsFloats(self):
-        
+
         # GIVEN
         bank = (
             BankBuilder()
@@ -64,17 +64,23 @@ class TestBank:
         second = bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD)
         assert second == Money.of(13, Currency.USD)
 
-    
+
     def test_givenBank_WhenSetPivotCurrency_ThenPivotIsDefined(self):
-        """Quand l'expert définit  le pivot, alors le pivot doit être une devise reconnu par la banque"""
+        """
+        Quand l'expert définit  le pivot, alors le pivot doit être une devise
+        reconnu par la banque
+        """
         bank = Bank()
 
         bank.setPivotCurrency(Currency.USD)
 
         assert bank.pivot == Currency.USD
-        
+
     def test_givenEURToJPYViaPivotUSD(self):
-        """Quand un montant est convertie entre 2 devises non-pivot, alors la convertion passe par la devise pivot"""
+        """
+        Quand un montant est converti entre 2 devises non-pivot,
+        alors la conversion passe par la devise pivot
+        """
         bank = BankBuilder() \
             .with_rate(Currency.EUR, Currency.USD, 1.2) \
             .with_rate(Currency.USD, Currency.JPY, 100) \
@@ -87,7 +93,12 @@ class TestBank:
         assert result == Money.of(1200, Currency.JPY)
 
     def test_givenMissingSecondRate_WhenConvertViaPivot_ThenThrows(self):
-        """Quand un montant est convertie entre 2 devises non-pivot, alors la convertion passe par la devise pivot, mais si le taux de change entre la devise pivot et l'une des deux devises est manquant, alors une exception est levée"""
+        """
+        Quand un montant est convertie entre 2 devises non-pivot, alors la
+        convertion passe par la devise pivot, mais si le taux de change entre
+        la devise pivot et l'une des deux devises est manquant, alors une exception
+        est levée
+        """
         # GIVEN
         bank = (
             BankBuilder()
@@ -103,10 +114,13 @@ class TestBank:
             assert False
         except MissingExchangeRateError:
             assert True
-            
+
     #Given pivot Money, which does not exist , then throws an exception
     def test_givenUnknownCurrency_WhenSetPivot_ThenThrows(self):
-        """Quand un expert définit une devise pivot qui n'est pas reconnu par la banque, alors une exception est levée"""
+        """
+        Quand un expert définit une devise pivot qui n'est pas reconnu par
+        la banque, alors une exception est levée
+        """
         # GIVEN
         bank = Bank()
 
@@ -118,7 +132,10 @@ class TestBank:
             assert True
 
     def test_givenExistingPivot_WhenSetNewPivot_ThenThrows(self):
-        """Si une pivot currency est déjà définie et qu’on en définit une nouvelle , ERREUR"""
+        """
+        Si une pivot currency est déjà définie et qu’on en définit une nouvelle
+        , ERREUR
+        """
         # GIVEN
         bank = Bank()
         bank.setPivotCurrency(Currency.USD)
@@ -130,8 +147,10 @@ class TestBank:
         except ValueError:
             assert True
 
-    def test_givenRateAtoB_WhenConvertBtoA_ThenUseInverseRate(self): 
-        """Le taux inverse est égal à l’inverse du taux de change"""
+    def test_givenRateAtoB_WhenConvertBtoA_ThenUseInverseRate(self):
+        """
+        Le taux inverse est égal à l’inverse du taux de change
+        """
         # GIVEN
         bank = (
             BankBuilder()
@@ -154,9 +173,26 @@ class TestBank:
             assert False
         except ValueError:
             assert True
-            
+
     def test_givenExistingRate_WhenAddSameRate_ThenOverwrite(self):
         """Quand (un taux existe déjà pour cette devise) alors il est écrasé"""
+        # GIVEN
+        bank = (
+            BankBuilder()
+            .with_rate(Currency.EUR, Currency.USD, 1.08)
+            .build()
+        )
+
+        # WHEN
+        bank.addExchangeRate(Currency.EUR, Currency.USD, 1.10)
+
+        # THEN
+        result = bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD)
+        assert result == Money.of(11, Currency.USD)
+
+    def test_givenExistingRate_WhenAddExchangeRate_ThenOverwrite(self):
+        """Quand un montant est multiplié, alors le multiplicateur
+        doit être une valeur positive"""
         # GIVEN
         bank = (
             BankBuilder()
