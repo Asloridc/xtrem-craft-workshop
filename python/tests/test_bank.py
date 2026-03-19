@@ -111,3 +111,14 @@ class TestBank:
         except ValueError:
             assert True
         
+    def test_givenExistingPivot_WhenSetNewPivot_ThenThrows(self):
+        # GIVEN
+        bank = Bank()
+        bank.setPivotCurrency(Currency.USD)
+
+        # WHEN / THEN
+        try:
+            bank.setPivotCurrency(Currency.EUR)
+            assert False
+        except ValueError:
+            assert True

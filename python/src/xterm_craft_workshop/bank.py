@@ -73,4 +73,6 @@ class Bank:
     def setPivotCurrency(self, pivot: Currency) -> None:
         if not isinstance(pivot, Currency):
             raise ValueError("Invalid currency")
+        if self.pivot is not None :
+            raise ValueError("Pivot currency is already set")   
         self.pivot = pivot
