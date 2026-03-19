@@ -1,4 +1,3 @@
-
 from xterm_craft_workshop.bank import Bank
 from xterm_craft_workshop.currency import Currency
 from xterm_craft_workshop.missing_exchange_rate_error import MissingExchangeRateError
@@ -19,47 +18,45 @@ class TestBank:
 
     def test_givenEuroAmount_WhenConvertToSameCurrency_ThenReturnsSameAmount(self):
         # GIVEN
-        bank = BankBuilder().with_rate(Currency.EUR, Currency.EUR, 1).build()
+        bank = BankBuilder().build()
         amount = 10
         from_currency = Currency.EUR
         to_currency = Currency.EUR
-        expected = Money.of(10, Currency.EUR)
+
         # WHEN
         result = bank.convertMoney(Money.of(amount, from_currency), to_currency)
 
         # THEN
-        assert result == expected
+        assert result == Money.of(10, Currency.EUR)
 
-    def test_givenEuroAmount_WhenConvertWithMissingExchangeRate_ThenThrowsException(
-        self,
-    ):
+    def test_givenEuroAmount_WhenConvertWithMissingExchangeRate_ThenThrowsException(self):
         # GIVEN
-        from_currency = Currency.EUR
-        to_currency = Currency.KRW
-        bank = Bank()
-        amount = 10
-        # WHEN
+        bank = BankBuilder().build()
+
+        # WHEN / THEN
         try:
-            bank.convertMoney(Money.of(amount, from_currency), to_currency)
-            # THEN
+            bank.convertMoney(Money.of(10, Currency.EUR), Currency.KRW)
             assert False
         except MissingExchangeRateError:
             assert True
 
-    def test_givenEuroAmount_WhenConvertWithDifferentExchangeRate_ThenReturnsDifFloats(
-        self,
-    ):
-
-        # Given
-
-        bank: Bank = Bank.create(Currency.EUR, Currency.USD, 1.2)
-
-        assert bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD) == Money.of(
-            12, Currency.USD
+    def test_givenEuroAmount_WhenConvertWithDifferentExchangeRate_ThenReturnsDifFloats(self):
+        # GIVEN
+        bank = (
+            BankBuilder()
+            .with_rate(Currency.EUR, Currency.USD, 1.2)
+            .build()
         )
 
+        # WHEN
+        first = bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD)
+
+        # THEN
+        assert first == Money.of(12, Currency.USD)
+
+        # WHEN (update rate)
         bank.addExchangeRate(Currency.EUR, Currency.USD, 1.3)
 
-        assert bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD) == Money.of(
-            13, Currency.USD
-        )
+        # THEN
+        second = bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD)
+        assert second == Money.of(13, Currency.USD)
