@@ -6,6 +6,7 @@ from .BankBuilder import BankBuilder
 
 
 class TestBank:
+    #Given EUR->USD rate
     def test_givenEuroAmount_WhenConvertToUsd_ThenReturnsUsdAmount(self):
         # GIVEN
         bank = BankBuilder().with_rate(Currency.EUR, Currency.USD, 1.2).build()
@@ -15,7 +16,7 @@ class TestBank:
 
         # THEN
         assert result == Money.of(12, Currency.USD)
-
+    #Given missing EUR->USD rate
     def test_givenEuroAmount_WhenConvertToSameCurrency_ThenReturnsSameAmount(self):
         # GIVEN
         bank = BankBuilder().build()
@@ -28,7 +29,7 @@ class TestBank:
 
         # THEN
         assert result == Money.of(10, Currency.EUR)
-
+    #Given missing EUR->USD rate
     def test_givenEuroAmount_WhenConvertWithMissingExchangeRate_ThenThrowsException(self):
         # GIVEN
         bank = BankBuilder().build()
@@ -39,7 +40,7 @@ class TestBank:
             assert False
         except MissingExchangeRateError:
             assert True
-
+    #Given EUR->USD, pivot USD, missing USD->JPY
     def test_givenEuroAmount_WhenConvertWithDifferentExchangeRate_ThenReturnsDifFloats(self):
         # GIVEN
         bank = (
@@ -61,13 +62,14 @@ class TestBank:
         second = bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD)
         assert second == Money.of(13, Currency.USD)
         
+    #Given pivot USD, EUR->USD, missing USD->JPY 
     def test_givenBank_WhenSetPivotCurrency_ThenPivotIsDefined(self):
         bank = Bank()
 
         bank.setPivotCurrency(Currency.USD)
 
         assert bank.pivot == Currency.USD
-        
+    #Given EUR->USD, USD->JPY, pivot USD  
     def test_givenEURToJPYViaPivotUSD(self):
         bank = BankBuilder() \
             .with_rate(Currency.EUR, Currency.USD, 1.2) \
@@ -80,7 +82,8 @@ class TestBank:
 
         assert result == Money.of(1200, Currency.JPY)
         
-    def test_givenMissingSecondRate_WhenConvertViaPivot_ThenThrows():
+    # Given EUR->USD, missing USD->JPY, pivot USD
+    def test_givenMissingSecondRate_WhenConvertViaPivot_ThenThrows(self):
         # GIVEN
         bank = (
             BankBuilder()
@@ -96,5 +99,15 @@ class TestBank:
             assert False
         except MissingExchangeRateError:
             assert True
+    #Given pivot Money, which does not exist , then throws an exception 
+    def test_givenUnknownCurrency_WhenSetPivot_ThenThrows(self):
+        # GIVEN
+        bank = Bank()
+
+        # WHEN / THEN
+        try:
+            bank.setPivotCurrency("XXX")  
+            assert False
+        except ValueError:
+            assert True
         
-    
