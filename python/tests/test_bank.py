@@ -1,30 +1,25 @@
 
-from xterm_craft_workshop.bank import Bank
-from xterm_craft_workshop.currency import Currency
-from xterm_craft_workshop.missing_exchange_rate_error import MissingExchangeRateError
-from xterm_craft_workshop.money import Money
+from src.xterm_craft_workshop.bank import Bank
+from src.xterm_craft_workshop.currency import Currency
+from src.xterm_craft_workshop.missing_exchange_rate_error import MissingExchangeRateError
+from src.xterm_craft_workshop.money import Money
+from BankBuilder import BankBuilder
 
 
 class TestBank:
     def test_givenEuroAmount_WhenConvertToUsd_ThenReturnsUsdAmount(self):
         # GIVEN
-        from_currency = Currency.EUR
-        to_currency = Currency.USD
-        rate = 1.2
-        bank = Bank.create(from_currency, to_currency, rate)
-        amount = 10
-        expected = Money.of(12, Currency.USD)
+        bank = BankBuilder().with_rate(Currency.EUR, Currency.USD, 1.2).build()
+
         # WHEN
-        result = bank.convertMoney(Money.of(amount, from_currency), to_currency)
+        result = bank.convertMoney(Money.of(10, Currency.EUR), Currency.USD)
+
         # THEN
-        assert result == expected
+        assert result == Money.of(12, Currency.USD)
 
     def test_givenEuroAmount_WhenConvertToSameCurrency_ThenReturnsSameAmount(self):
         # GIVEN
-        from_currency = Currency.EUR
-        to_currency = Currency.EUR
-        rate = 1
-        bank = Bank.create(from_currency, to_currency, rate)
+        bank = BankBuilder().with_rate(Currency.EUR, Currency.EUR, 1).build()
         amount = 10
         expected = Money.of(10, Currency.EUR)
         # WHEN
