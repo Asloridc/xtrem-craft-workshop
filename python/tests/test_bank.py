@@ -68,4 +68,16 @@ class TestBank:
 
         assert bank.pivot == Currency.USD
         
+    def test_givenEURToJPYViaPivotUSD(self):
+        bank = BankBuilder() \
+            .with_rate(Currency.EUR, Currency.USD, 1.2) \
+            .with_rate(Currency.USD, Currency.JPY, 100) \
+            .build()
+
+        bank.setPivotCurrency(Currency.USD)
+
+        result = bank.convertMoney(Money.of(10, Currency.EUR), Currency.JPY)
+
+        assert result == Money.of(1200, Currency.JPY)
+        
     
