@@ -71,4 +71,6 @@ class Bank:
         return f"{from_currency.value}->{to_currency.value}" in self._exchange_rate
     
     def setPivotCurrency(self, pivot: Currency) -> None:
+        if not isinstance(pivot, Currency):
+            raise ValueError("Invalid currency")
         self.pivot = pivot
