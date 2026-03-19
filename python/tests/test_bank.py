@@ -220,3 +220,20 @@ class TestBank:
             assert False
         except ValueError:
             assert True
+    
+    def test_givenNoPivot_WhenConvertBetweenTwoNonPivotCurrencies_ThenThrows(self):
+        """Quand aucune pivot currency n’est définie, certaines conversions sont impossibles"""
+        # GIVEN
+        bank = (
+            BankBuilder()
+            .with_rate(Currency.EUR, Currency.USD, 1.2)
+            .with_rate(Currency.USD, Currency.JPY, 100)
+            .build()
+        )
+
+        # WHEN / THEN
+        try:
+            bank.convertMoney(Money.of(10, Currency.EUR), Currency.JPY)
+            assert False
+        except MissingExchangeRateError:
+            assert True
