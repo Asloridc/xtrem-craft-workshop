@@ -20,6 +20,8 @@ class Bank:
     def addExchangeRate(
         self, from_currency: Currency, to_currency: Currency, rate: float
     ) -> None:
+        if rate <= 0:
+            raise ValueError("Exchange rate must be positive")
         self._exchange_rate[f"{from_currency.value}->{to_currency.value}"] = rate
 
     def convertMoney_old(self, money: "Money", to_currency: Currency) -> "Money":
