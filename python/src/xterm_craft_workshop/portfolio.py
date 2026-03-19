@@ -16,5 +16,5 @@ class Portfolio:
     def evaluate(self, bank: Bank, currency: Currency) -> Money:
         total = Money.of(0.0, currency)
         for money in self._moneys:
-            total += bank.convertMoney_old(money, currency)
+            total += bank.convertMoney(money, currency)
         return total
