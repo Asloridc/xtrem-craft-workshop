@@ -80,4 +80,21 @@ class TestBank:
 
         assert result == Money.of(1200, Currency.JPY)
         
+    def test_givenMissingSecondRate_WhenConvertViaPivot_ThenThrows():
+        # GIVEN
+        bank = (
+            BankBuilder()
+            .with_rate(Currency.EUR, Currency.USD, 1.2)
+            .build()
+        )
+
+        bank.setPivotCurrency(Currency.USD)
+
+        # WHEN / THEN
+        try:
+            bank.convertMoney(Money.of(10, Currency.EUR), Currency.JPY)
+            assert False
+        except MissingExchangeRateError:
+            assert True
+        
     
